@@ -1,0 +1,51 @@
+<div class="h-screen w-screen login-background flex justify-center items-center">
+	<div class="w-full max-w-md p-8 m-auto bg-white rounded-3xl shadow-xl dark:bg-gray-800">
+	  <h1 class="text-3xl font-semibold text-center text-gray-800 dark:text-white">TodoApp</h1>
+	
+	  <form [formGroup]="loginForm" (ngSubmit)="login()" class="mt-6">
+		<div>
+		  <label class="block text-sm text-gray-600 font-medium dark:text-gray-200">Usuario</label>
+		  <input formControlName="username" type="text" class="appearance-none block w-full mt-1 bg-gray-100 text-gray-700 rounded-lg py-2.5 px-4 leading-tight focus:outline-none transition duration-200 focus:bg-gray-200">
+		  <span *ngIf="fmValidation.getFormControlError('username') as error" class="text-right font-medium text-xs text-red-400">{{ error }}</span>
+		</div>
+	
+		<div class="mt-4">
+		  <div class="flex items-center justify-between">
+			<label class="block text-sm text-gray-600 font-medium dark:text-gray-200">Contraseña</label>
+			<a class="text-[13px] cursor-pointer text-gray-600 dark:text-gray-400 hover:underline">¿Olvidaste tu contraseña?</a>
+		  </div>
+	
+		  <input formControlName="password" type="password" autocomplete="on" class="appearance-none block w-full mt-1 bg-gray-100 text-gray-700 rounded-lg py-2.5 px-4 leading-tight focus:outline-none transition duration-200 focus:bg-gray-200">
+		  <span *ngIf="fmValidation.getFormControlError('password') as error" class="text-right font-medium text-xs text-red-400">{{ error }}</span>
+		</div>
+	
+		<div class="mt-8">
+			<button type="submit" class="flex items-center justify-center w-full px-6 py-2 font-medium text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-900">
+				<span class="hidden mx-2 sm:inline">Iniciar Sesión</span>
+			</button>
+		</div>
+	  </form>
+	
+	  <div class="flex items-center justify-between mt-6">
+		<span class="w-2/5 border-b border-gray-300 dark:border-gray-600 lg:w-1/5"></span>
+	
+		<a class="text-sm w-3/5 text-center cursor-pointer text-gray-500 dark:text-gray-400 hover:underline">¿No Tienes Cuenta?</a>
+	
+		<span class="w-2/5 border-b border-gray-300 dark:border-gray-400 lg:w-1/5"></span>
+	  </div>
+	
+	  <div class="flex items-center mt-6 -mx-2">
+		<button routerLink="/register" type="button" class="flex items-center justify-center w-full px-6 py-2 mx-2 text-sm font-medium text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:bg-blue-400 focus:outline-none">
+		  <span class="hidden mx-2 sm:inline">Crear Cuenta</span>
+		</button>
+	
+		<a routerLink="/register" class="p-2 mx-2 text-sm font-medium cursor-pointer text-gray-500 transition-colors duration-200 transform bg-gray-300 rounded-md hover:bg-gray-200">
+			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+				<path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+			</svg>
+		</a>
+	  </div>
+	  
+	  <div class="h-5"></div>
+	</div>
+</div>
