@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormValidation } from 'src/app/utils/form-validation.util.';
@@ -13,7 +14,7 @@ import { FormValidation } from 'src/app/utils/form-validation.util.';
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup = this.buildRegisterForm();
 
-  constructor(private fmBuilder: FormBuilder, private authService: AuthService, private router: Router, public fmValidation: FormValidation) { }
+  constructor(private fmBuilder: FormBuilder, private authService: AuthService, private router: Router, public fmValidation: FormValidation, private toast: ToastrService) { }
 
   ngOnInit(){
     this.fmValidation.setForm(this.registerForm);
@@ -36,6 +37,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.registerForm.markAllAsTouched();
     if (this.registerForm.invalid) return;
 
     const { username, firstname, lastname, email, password } = this.registerForm.value;
@@ -50,13 +52,23 @@ export class RegisterComponent implements OnInit {
 
     this.authService.register(user).subscribe(
       data => {
-        if (!data.success) return alert(data?.message || 'Registro fallido, intenta otra vez');
-        alert(data.message)
+        if (!data.success) {
+          this.toast.error(data.message, 'Registro fallido');
+          return;
+        }
         this.router.navigateByUrl("/login");
+        this.toast.success(`Bienvenido ${data?.data?.firstName}`, 'Registro Exitoso');
       },
-
       error => {
-        alert(error?.message?.responseStatus?.message || 'Registro fallido, intenta otra vez');
+        if (error?.error?.responseStatus?.message === `Email '${user.email}' already exists`) {
+          this.toast.error('Correo en uso', 'Registro fallido');
+        
+        } else if (error?.error?.responseStatus?.message === `User '${user.userName}' already exists`) {
+          this.toast.error('Usuario en uso', 'Registro fallido');
+          
+        } else {
+          this.toast.error('Intenta otra vez', 'Registro fallido')
+        }
       }
     );
   }

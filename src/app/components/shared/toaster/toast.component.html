@@ -1,0 +1,46 @@
+<div [@slideInRightOnEnter] class="fixed pointer-events-none min-w-[320px] top-5 right-5 max-w-md">
+    
+    <div class="flex cursor-default pointer-events-auto w-full mx-auto bg-white rounded-xl rounded-l-2xl toast-shadow dark:bg-gray-800">
+        <div [style.backgroundColor]="toastStyle.background" class="flex items-center justify-center rounded-l-xl w-12">
+            <div [ngSwitch]="toastPackage.toastType">
+                <ng-container *ngSwitchCase="'toast-error'">
+                    <ng-container *ngTemplateOutlet="errorIcon"></ng-container>
+                </ng-container>
+                
+                <ng-container *ngSwitchCase="'toast-success'">
+                    <ng-container *ngTemplateOutlet="successIcon"></ng-container>
+                </ng-container>
+
+                <ng-container *ngSwitchCase="'toast-info'">
+                    <ng-container *ngTemplateOutlet="infoIcon"></ng-container>
+                </ng-container>
+            </div>
+        </div>
+        
+        <div class="px-4 py-2 -mx-3">
+            <div class="mx-3">
+                <span [style.color]="toastStyle.text" class="font-semibold text-[15px] dark:text-green-400">{{ title }}</span>
+                <p class="text-sm mt-[-3px] text-gray-600 dark:text-gray-200">{{ message }}</p>
+            </div>
+        </div>
+    </div>
+        
+</div>
+
+<ng-template #successIcon>
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM16.6667 28.3333L8.33337 20L10.6834 17.65L16.6667 23.6166L29.3167 10.9666L31.6667 13.3333L16.6667 28.3333Z"/>
+    </svg>
+</ng-template>
+
+<ng-template #errorIcon>
+    <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 3.33331C10.8 3.33331 3.33337 10.8 3.33337 20C3.33337 29.2 10.8 36.6666 20 36.6666C29.2 36.6666 36.6667 29.2 36.6667 20C36.6667 10.8 29.2 3.33331 20 3.33331ZM21.6667 28.3333H18.3334V25H21.6667V28.3333ZM21.6667 21.6666H18.3334V11.6666H21.6667V21.6666Z"/>
+    </svg>
+</ng-template>
+
+<ng-template #infoIcon>
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.496 6.033h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286a.237.237 0 0 0 .241.247zm2.325 6.443c.61 0 1.029-.394 1.029-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94 0 .533.425.927 1.01.927z"/>
+    </svg>
+</ng-template>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormValidation } from 'src/app/utils/form-validation.util.';
 
@@ -11,7 +13,13 @@ import { FormValidation } from 'src/app/utils/form-validation.util.';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup = this.buildLoginForm();
 
-  constructor(private fmBuilder: FormBuilder, private authService: AuthService, public fmValidation: FormValidation) { }
+  constructor(
+    private fmBuilder: FormBuilder,
+    private authService: AuthService,
+    public fmValidation: FormValidation,
+    private toast: ToastrService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.fmValidation.setForm(this.loginForm);
@@ -25,16 +33,23 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.loginForm.markAllAsTouched();
     if (this.loginForm.invalid) return;
 
     const { username, password } = this.loginForm.value;
 
     this.authService.login(username, password).subscribe(
       data => {
-        if (data.bearerToken) alert('Ingreso exitoso');
+        this.toast.success(`Bienvenido ${data?.userName}`, `Ingreso exitoso`);
+        this.router.navigateByUrl('/home');
       },
       error => {
-        if (error?.error?.responseStatus?.errorCode === 'Unauthorized') alert('Usuario o contraseña incorrecta');
+        if (error?.error?.responseStatus?.errorCode === 'Unauthorized') {
+          this.toast.error('Usuario o contraseña incorrecta', 'Ingreso fallido');
+        
+        } else {
+          this.toast.error('Intenta otra vez', 'Ingreso fallido');
+        }
       }
     );
   }
