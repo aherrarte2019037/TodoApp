@@ -40,4 +40,8 @@ export class AuthService {
     localStorage.removeItem('token');
   }
 
+  logOut() {
+    this.deleteToken();
+  }
+
 }
