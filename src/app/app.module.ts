@@ -11,8 +11,10 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastComponent } from './components/shared/toaster/toast.component';
-import { TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
+import { TaskListComponent } from './components/task-list/task-list.component';
+import { TaskAddComponent } from './components/task-add/task-add.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
     LoginComponent,
     HomeComponent,
     RegisterComponent,
-    ToastComponent
+    ToastComponent,
+    TaskListComponent,
+    TaskAddComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,7 @@ import { AuthInterceptorService } from './interceptors/auth-interceptor.service'
       autoDismiss: true,
       timeOut: 4000,
       tapToDismiss: false,
+      preventDuplicates: true
     }),
     AppRoutingModule,
     HttpClientModule,

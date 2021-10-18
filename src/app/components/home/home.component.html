@@ -1,1 +1,53 @@
-<p>home works!</p>
+<div class="h-screen w-screen bg-gray-800 flex justify-center items-center">
+    <div class="w-full max-w-md flex flex-col h-1/2 gap-y-8">
+        <div class="px-7 w-full bg-white pb-2 shadow-xl rounded-2xl">
+            <div class="flex">
+                <div class="flex-1 cursor-pointer group">
+                    <a routerLink="list" routerLinkActive="nav-link-active" class="flex transition duration-100 flex-col items-center justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-gray-600">
+                        <span class="block px-1 pt-1 pb-1">
+                            <div class="flex justify-center transition duration-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-list-ul" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                                </svg>
+                            </div>
+                            <span class="block transition duration-100 text-[13px] pb-1.5 font-semibold">Tareas</span>
+                            <span class="block transition duration-100 span-indicator bg-gray-400 w-6 mx-auto h-1 group-hover:bg-gray-600 rounded-full"></span>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="flex-1 cursor-pointer group">
+                    <a routerLink="add" routerLinkActive="nav-link-active" class="flex flex-col transition duration-100 items-center justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-gray-600">
+                        <span class="block px-1 pt-1 pb-1">
+                            <div class="flex justify-center transition duration-100">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                </svg>
+                            </div>
+                            <span class="block transition duration-100 text-[13px] pb-1.5 font-semibold">Añadir</span>
+                            <span class="block transition duration-100 span-indicator bg-gray-400 w-6 mx-auto h-1 group-hover:bg-gray-600 rounded-full"></span>
+                        </span>
+                    </a>
+                </div>
+
+                <div class="flex-1 cursor-pointer group">
+                    <button (click)="logOut()" class="flex flex-col items-center transition duration-100 justify-center text-center mx-auto px-4 pt-2 w-full text-gray-400 group-hover:text-gray-600">
+                        <span class="block px-1 pt-1 pb-1">
+                            <div class="flex transition duration-100 justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-open-fill" viewBox="0 0 16 16">
+                                    <path d="M1.5 15a.5.5 0 0 0 0 1h13a.5.5 0 0 0 0-1H13V2.5A1.5 1.5 0 0 0 11.5 1H11V.5a.5.5 0 0 0-.57-.495l-7 1A.5.5 0 0 0 3 1.5V15H1.5zM11 2h.5a.5.5 0 0 1 .5.5V15h-1V2zm-2.5 8c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                                </svg>
+                            </div>
+                            <span class="block transition duration-100 text-[13px] pb-1.5 font-semibold">Cerrar Sesión</span>
+                            <span class="block transition duration-100 bg-gray-400 w-6 mx-auto h-1 group-hover:bg-gray-600 rounded-full"></span>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div [@moveFromRight]="outlet.activatedRouteData.state" [@moveFromLeft]="outlet.activatedRouteData.state" class="bg-white router-wrapper shadow-xl rounded-2xl">
+            <router-outlet #outlet="outlet"></router-outlet>
+        </div>
+    </div>
+</div>
