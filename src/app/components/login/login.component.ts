@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/home');
       },
       error => {
+        console.log(error)
         if (error?.error?.responseStatus?.errorCode === 'Unauthorized') {
           this.toast.error('Usuario o contraseña incorrecta', 'Ingreso fallido');
         

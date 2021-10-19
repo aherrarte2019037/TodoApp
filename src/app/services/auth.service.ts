@@ -16,7 +16,7 @@ export class AuthService {
 
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}/auth/credentials${this.jsonFormat}`, {username, password}).pipe(
-      tap<any>( data => this.setToken(data.bearerToken) )
+      tap<any>( data => this.setUserData(data) )
     );
   }
 
@@ -25,23 +25,32 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return localStorage.getItem('token') ? true : false;
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    const token = user?.token || null;
+    return token ? true : false;
   } 
 
-  setToken(token: string) {
-    localStorage.setItem( 'token', token );
+  setUserData(userData: any) {
+    const user: string = JSON.stringify({ token: userData?.bearerToken, user: userData?.userId });
+    localStorage.setItem( 'user', user );
   }
 
   getToken(): string {
-    return localStorage.getItem('token') ?? '';
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    return user?.token ?? '';
   }
 
   deleteToken() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('user');
   }
 
   logOut() {
     this.deleteToken();
+  }
+
+  getUserLoggedId() {
+    const userData = JSON.parse(localStorage.getItem('user') || '{}');
+    return +userData?.user;
   }
 
 }

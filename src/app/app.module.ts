@@ -11,7 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastComponent } from './components/shared/toaster/toast.component';
-import { TitleCasePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 import { TaskListComponent } from './components/task-list/task-list.component';
 import { TaskAddComponent } from './components/task-add/task-add.component';
@@ -44,6 +44,7 @@ import { TaskAddComponent } from './components/task-add/task-add.component';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true },
     TitleCasePipe,
+    DatePipe,
   ],
   bootstrap: [AppComponent]
 })

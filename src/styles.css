@@ -6,3 +6,11 @@
 .ngx-toastr {
     padding: 0!important;
 }
+
+.tooltip {
+    @apply opacity-0 absolute text-xs;
+}
+  
+.has-tooltip:hover .tooltip {
+    @apply opacity-100 transition duration-300 z-50 top-0 left-0 px-2 w-max rounded shadow-lg p-1 bg-white font-semibold text-gray-800 -mt-8;
+}

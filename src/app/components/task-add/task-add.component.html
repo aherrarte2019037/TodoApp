@@ -1,1 +1,31 @@
-<p>task-add works!</p>
+<div class="w-full h-full flex justify-center flex-col p-8">
+    <h1 class="text-[22px] -mt-3 mb-4 font-semibold text-gray-800">Crear tarea</h1>
+
+    <form [formGroup]="createTaskForm" (ngSubmit)="createTask()">
+        <div class="flex items-start gap-x-4 w-full">
+            <div class="w-1/2">
+              <label class="block text-sm text-gray-600 font-medium dark:text-gray-200">Nombre</label>
+              <input formControlName="name" type="text" class="appearance-none block w-full mt-1 bg-gray-100 text-gray-700 rounded-lg py-2.5 px-4 leading-tight focus:outline-none transition duration-200 focus:bg-gray-200">
+              <span *ngIf="fmValidation.getFormControlError('name') as error" class="text-right font-medium text-xs text-red-400">{{ error }}</span>
+            </div>
+    
+            <div class="w-1/2">
+                <label class="block text-sm text-gray-600 font-medium dark:text-gray-200">Fecha para completar</label>
+                <input formControlName="completeAt" type="date" [min]="minDate" class="appearance-none block w-full mt-1 bg-gray-100 text-gray-700 rounded-lg py-2.5 px-4 leading-tight focus:outline-none transition duration-200 focus:bg-gray-200">
+                <span *ngIf="fmValidation.getFormControlError('completeAt') as error" class="text-right font-medium text-xs text-red-400">{{ error }}</span>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <label class="block text-sm text-gray-600 font-medium dark:text-gray-200">Descripción</label>
+            <textarea formControlName="description" rows="2" class="appearance-none block w-full mt-1 bg-gray-100 text-gray-700 rounded-lg py-2.5 px-4 leading-tight focus:outline-none transition duration-200 focus:bg-gray-200"></textarea>
+            <span *ngIf="fmValidation.getFormControlError('description') as error" class="text-right font-medium text-xs text-red-400">{{ error }}</span>
+        </div>
+    
+        <div class="mt-5">
+            <button type="submit" class="flex items-center justify-center w-full px-6 py-2 font-medium text-white transition-colors duration-200 transform bg-gray-800 rounded-md hover:bg-gray-900">
+                <span class="hidden mx-2 sm:inline">Añadir</span>
+            </button>
+        </div>
+    </form>
+</div>
